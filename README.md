@@ -1,2 +1,2 @@
 # Pretty-Pong
-It's pong, but *prettier*
+It's pong, but *prettier*!
