@@ -9,6 +9,9 @@ let ballY = canvas.height / 2;
 let ballRadius = 8;
 let ballSpeedX = 3;
 let ballSpeedY = 2.5;
+let keys = {};
+document.addEventListener('keydown',function(e){keys[e.key]=true;});
+document.addEventListener('keyup',function(e){keys[e.key]=false;});
 function draw() {
     cc.fillStyle = '#FFC0CB';
     cc.fillRect(0, 0, canvas.width, canvas.height);
@@ -18,11 +21,15 @@ function draw() {
     cc.fillRect(canvas.width - 20, rightpaddley, paddleWidth, paddleHeight);
     cc.beginPath();
     cc.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
-    cc.fillStyle = '#e75480';
+    cc.fillStyle = '#F0FFFF';
     cc.fill();
     cc.closePath();
 }
 function update() {
+    if(keys['w']&&leftpaddley>0)leftpaddley-=6;
+    if(keys['s']&&leftpaddley<canvas.height-paddleHeight)leftpaddley+=6;
+    if(keys['ArrowUp']&&rightpaddley>0)rightpaddley-=6;
+    if(keys['ArrowDown']&&rightpaddley<canvas.height-paddleHeight)rightpaddley+=6;
     ballX += ballSpeedX;
     ballY += ballSpeedY;
     if (ballY - ballRadius < 0 || ballY + ballRadius > canvas.height) {
