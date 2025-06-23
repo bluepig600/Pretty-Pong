@@ -10,6 +10,7 @@ let ballRadius = 8;
 let ballSpeedX = 3;
 let ballSpeedY = 2.5;
 let keys = {};
+let gameOver = false;
 document.addEventListener('keydown',function(e){keys[e.key]=true;});
 document.addEventListener('keyup',function(e){keys[e.key]=false;});
 function draw() {
@@ -24,8 +25,15 @@ function draw() {
     cc.fillStyle = '#F0FFFF';
     cc.fill();
     cc.closePath();
+    if(gameOver){
+        cc.fillStyle = '#e75480';
+        cc.font = '48px Luxurious Script, cursive';
+        cc.textAlign = 'center';
+        cc.fillText('Game Over', canvas.width/2, canvas.height/2);
+    }
 }
 function update() {
+    if(gameOver)return;
     if(keys['w']&&leftpaddley>0)leftpaddley-=6;
     if(keys['s']&&leftpaddley<canvas.height-paddleHeight)leftpaddley+=6;
     if(keys['ArrowUp']&&rightpaddley>0)rightpaddley-=6;
@@ -42,12 +50,12 @@ function update() {
         ballSpeedX = -Math.abs(ballSpeedX);
     }
     if (ballX - ballRadius < 0 || ballX + ballRadius > canvas.width) {
-        ballSpeedX = -ballSpeedX;
+        gameOver = true;
     }
 }
 function gameLoop() {
     update();
     draw();
-    requestAnimationFrame(gameLoop);
+    if(!gameOver)requestAnimationFrame(gameLoop);
 }
 gameLoop();
