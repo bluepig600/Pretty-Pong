@@ -3,6 +3,20 @@
   font-weight: 200;
   font-style: normal;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  text-align: center;
+  overflow: hidden;
+  background: #FFC0CB;
+}
+
+#pongCanvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
 }
